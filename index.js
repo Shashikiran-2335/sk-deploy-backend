@@ -19,8 +19,8 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch((err) => console.error('❌ MongoDB connection error:', err));
 
 // Routes
-app.use('borrow', borrowRoutes);
-app.use('borrow/customers', borrowRoutes);
+app.use('/borrow', borrowRoutes);
+app.use('/borrow/customers', borrowRoutes);
 
 // Start server
 app.listen(PORT, () => {
