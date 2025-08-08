@@ -1,6 +1,7 @@
 const express = require('express');
-const router = express.Router();
+const mongoose = require('mongoose');
 const Borrow = require('../models/Borrow');
+const router = express.Router();
 
 // POST: Add new borrow entry
 router.post('/', async (req, res) => {
@@ -23,8 +24,8 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: "Error fetching entries" });
   }
 });
-const mongoose = require('mongoose');
-// DELETE: Remove a borrow entry by ID
+
+// DELETE: Remove a borrow entry
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
 
@@ -44,7 +45,8 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-router.get('borrow/customers', async (req, res) => {
+// GET: Fetch unique customers
+router.get('/customers', async (req, res) => {
   try {
     const customers = await Borrow.distinct('customerName');
     res.json(customers);
@@ -52,4 +54,5 @@ router.get('borrow/customers', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch customers' });
   }
 });
+
 module.exports = router;
