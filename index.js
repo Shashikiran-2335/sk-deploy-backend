@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config(); // Load environment variables
+require('dotenv').config();
 const borrowRoutes = require('./routes/borrow');
 
 const app = express();
@@ -20,9 +20,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Routes
 app.use('/borrow', borrowRoutes);
-app.use('/borrow/customers', borrowRoutes);
 
-// Start server
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
 });
